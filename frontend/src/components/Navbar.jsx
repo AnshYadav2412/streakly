@@ -36,6 +36,12 @@ const Navbar = () => {
               Dashboard
             </Link>
             <Link 
+              to="/projects" 
+              className={`nav-link ${isActive('/projects') ? 'text-orange-600 font-semibold' : ''}`}
+            >
+              Projects
+            </Link>
+            <Link 
               to="/analytics" 
               className={`nav-link ${isActive('/analytics') ? 'text-orange-600 font-semibold' : ''}`}
             >
@@ -92,6 +98,17 @@ const Navbar = () => {
                 }`}
               >
                 📊 Dashboard
+              </Link>
+              <Link
+                to="/projects"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-4 py-2 text-base font-medium transition-colors ${
+                  isActive('/projects')
+                    ? 'text-orange-600 bg-orange-50'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                📋 Projects
               </Link>
               <Link
                 to="/analytics"
