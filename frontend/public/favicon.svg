@@ -1,0 +1,12 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simplified streak icon for favicon -->
+  <!-- 5 ascending bars representing a growing streak -->
+  <rect x="3" y="22" width="4" height="7" rx="2" fill="#fcd34d"/>
+  <rect x="9" y="18" width="4" height="11" rx="2" fill="#fbbf24"/>
+  <rect x="15" y="13" width="4" height="16" rx="2" fill="#f59e0b"/>
+  <rect x="21" y="8" width="4" height="21" rx="2" fill="#ea8c00"/>
+  <rect x="27" y="3" width="4" height="26" rx="2" fill="#d97706"/>
+  
+  <!-- Flame tip -->
+  <circle cx="29" cy="2" r="1.5" fill="#f97316"/>
+</svg>

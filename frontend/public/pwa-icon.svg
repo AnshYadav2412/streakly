@@ -1,0 +1,26 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#f59e0b" rx="80"/>
+  
+  <!-- Streakly Icon - 5 ascending bars -->
+  <g transform="translate(106, 156)">
+    <!-- Bar 1 - shortest -->
+    <rect x="0" y="144" width="50" height="80" rx="25" fill="#fcd34d"/>
+    
+    <!-- Bar 2 -->
+    <rect x="70" y="112" width="50" height="112" rx="25" fill="#fbbf24"/>
+    
+    <!-- Bar 3 -->
+    <rect x="140" y="72" width="50" height="152" rx="25" fill="#ffffff"/>
+    
+    <!-- Bar 4 -->
+    <rect x="210" y="32" width="50" height="192" rx="25" fill="#fbbf24"/>
+    
+    <!-- Bar 5 - tallest -->
+    <rect x="280" y="0" width="50" height="224" rx="25" fill="#fcd34d"/>
+    
+    <!-- Flame tip -->
+    <circle cx="305" cy="-20" r="18" fill="#ff6b35"/>
+    <circle cx="305" cy="-20" r="10" fill="#ffffff"/>
+  </g>
+</svg>

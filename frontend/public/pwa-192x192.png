@@ -1,0 +1,12 @@
+This is a placeholder for the PNG icon. You'll need to convert the SVG to PNG format.
+
+To create the PNG icon from the SVG:
+1. Open pwa-icon.svg in a graphics editor (like GIMP, Photoshop, or online tool like CloudConvert)
+2. Export as PNG at 192x192 pixels
+3. Save as pwa-192x192.png in the public folder
+
+Alternatively, you can use an online converter:
+- Go to https://cloudconvert.com/svg-to-png
+- Upload pwa-icon.svg
+- Set dimensions to 192x192
+- Download and replace this file
