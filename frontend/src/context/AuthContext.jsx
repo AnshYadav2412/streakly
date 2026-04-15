@@ -16,7 +16,18 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth`;
+  // Auto-detect API URL based on current host
+  const getApiUrl = () => {
+    const currentHost = window.location.hostname;
+    if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+      return 'http://localhost:5000/api/auth';
+    } else {
+      // Use the same IP as the frontend for mobile testing
+      return `http://${currentHost}:5000/api/auth`;
+    }
+  };
+
+  const API_URL = getApiUrl();
 
   // Configure axios defaults
   axios.defaults.withCredentials = true;

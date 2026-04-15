@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/streakly_icon.svg';
+import InstallInstructions from '../components/InstallInstructions';
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -227,6 +228,19 @@ const Home = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Install App Section */}
+      <section className="section bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50">
+        <div className="container-narrow">
+          <div className="text-center mb-12">
+            <h2 className="heading-2 mb-4">Get the Streakly App</h2>
+            <p className="text-lead max-w-2xl mx-auto">
+              Install Streakly on your device for quick access, offline support, and a native app experience
+            </p>
+          </div>
+          <InstallInstructions />
         </div>
       </section>
 
