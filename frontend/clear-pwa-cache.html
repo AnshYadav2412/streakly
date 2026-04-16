@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear PWA Cache</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #d97706;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            background: #e5e7eb;
+        }
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🧹 Clear PWA Cache & Service Workers</h1>
+        <p>This will remove all cached PWA files and service workers.</p>
+        
+        <button onclick="clearEverything()">Clear All Cache & Service Workers</button>
+        <button onclick="window.location.reload()">Reload Page</button>
+        
+        <div id="status" class="status" style="display:none;"></div>
+    </div>
+
+    <script>
+        async function clearEverything() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status';
+            statusDiv.innerHTML = 'Clearing...';
+
+            try {
+                // Unregister all service workers
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (let registration of registrations) {
+                        await registration.unregister();
+                        console.log('Service Worker unregistered:', registration);
+                    }
+                    statusDiv.innerHTML += '<br>✅ Service workers unregistered';
+                }
+
+                // Clear all caches
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    for (let cacheName of cacheNames) {
+                        await caches.delete(cacheName);
+                        console.log('Cache deleted:', cacheName);
+                    }
+                    statusDiv.innerHTML += '<br>✅ All caches cleared';
+                }
+
+                // Clear localStorage
+                localStorage.clear();
+                statusDiv.innerHTML += '<br>✅ LocalStorage cleared';
+
+                // Clear sessionStorage
+                sessionStorage.clear();
+                statusDiv.innerHTML += '<br>✅ SessionStorage cleared';
+
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML += '<br><br><strong>✅ All cleared! Close this tab and restart your dev server.</strong>';
+
+            } catch (error) {
+                statusDiv.innerHTML = '❌ Error: ' + error.message;
+                console.error('Error clearing:', error);
+            }
+        }
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            console.log('PWA Cache Cleaner loaded');
+        });
+    </script>
+</body>
+</html>
