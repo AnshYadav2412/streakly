@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/habits', require('./routes/habitRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
+app.use('/api/time', require('./routes/timeRoutes'));
 
 // Error handler
 app.use((err, req, res, next) => {

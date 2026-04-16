@@ -42,6 +42,12 @@ const Navbar = () => {
               Projects
             </Link>
             <Link 
+              to="/time" 
+              className={`nav-link ${isActive('/time') ? 'text-orange-600 font-semibold' : ''}`}
+            >
+              Time
+            </Link>
+            <Link 
               to="/analytics" 
               className={`nav-link ${isActive('/analytics') ? 'text-orange-600 font-semibold' : ''}`}
             >
@@ -109,6 +115,17 @@ const Navbar = () => {
                 }`}
               >
                 📋 Projects
+              </Link>
+              <Link
+                to="/time"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-4 py-2 text-base font-medium transition-colors ${
+                  isActive('/time')
+                    ? 'text-orange-600 bg-orange-50'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                ⏱️ Time
               </Link>
               <Link
                 to="/analytics"

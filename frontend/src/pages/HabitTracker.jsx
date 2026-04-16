@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import TimePicker from '../components/TimePicker';
 import ConfirmDialog from '../components/ConfirmDialog';
+import StreakCalendar from '../components/StreakCalendar';
 
 const HabitTracker = () => {
   const { user } = useAuth();
@@ -248,6 +249,11 @@ const HabitTracker = () => {
               </div>
               <p className="text-xs sm:text-sm text-gray-600">Earned this week</p>
             </div>
+          </div>
+
+          {/* Streak Calendar */}
+          <div className="mb-8">
+            <StreakCalendar habits={habits} />
           </div>
 
           {/* Habit Tracker Grid */}
