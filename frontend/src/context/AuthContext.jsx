@@ -18,6 +18,11 @@ export const AuthProvider = ({ children }) => {
 
   // Auto-detect API URL based on current host
   const getApiUrl = () => {
+    // Use environment variable if available
+    if (import.meta.env.VITE_API_URL) {
+      return `${import.meta.env.VITE_API_URL}/api/auth`;
+    }
+    
     const currentHost = window.location.hostname;
     if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
       return 'http://localhost:5000/api/auth';
