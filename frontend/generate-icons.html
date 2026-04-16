@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate PWA Icons</title>
+</head>
+<body>
+    <h1>PWA Icon Generator</h1>
+    <p>This will generate PWA icons from your SVG logo</p>
+    <canvas id="canvas192" width="192" height="192" style="border:1px solid #ccc; margin:10px;"></canvas>
+    <canvas id="canvas512" width="512" height="512" style="border:1px solid #ccc; margin:10px;"></canvas>
+    <br>
+    <button onclick="generateIcons()">Generate Icons</button>
+    <div id="downloads"></div>
+
+    <script>
+        function generateIcons() {
+            const sizes = [
+                { size: 192, canvasId: 'canvas192', filename: 'pwa-192x192.png' },
+                { size: 512, canvasId: 'canvas512', filename: 'pwa-512x512.png' }
+            ];
+
+            sizes.forEach(({ size, canvasId, filename }) => {
+                const canvas = document.getElementById(canvasId);
+                const ctx = canvas.getContext('2d');
+                
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, size, size);
+                gradient.addColorStop(0, '#f59e0b');
+                gradient.addColorStop(1, '#d97706');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, size, size);
+                
+                // Add text
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `bold ${size/4}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('S', size/2, size/2);
+                
+                // Create download link
+                canvas.toBlob(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    a.textContent = `Download ${filename}`;
+                    a.style.display = 'block';
+                    a.style.margin = '10px';
+                    document.getElementById('downloads').appendChild(a);
+                });
+            });
+            
+            alert('Icons generated! Click the download links below.');
+        }
+    </script>
+</body>
+</html>
