@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Login user
-  const login = async (email, password) => {
+  const login = async (email, password, rememberMe = false) => {
     try {
       setError(null);
       const response = await axios.post(`${API_URL}/login`, {
@@ -93,7 +93,11 @@ export const AuthProvider = ({ children }) => {
       });
 
       const { data } = response.data;
+      
+      // Store token and remember me preference
       localStorage.setItem('token', data.token);
+      localStorage.setItem('rememberMe', rememberMe ? 'true' : 'false');
+      
       setUser(data);
       return { success: true };
     } catch (error) {
@@ -111,6 +115,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Logout error:', error);
     } finally {
       localStorage.removeItem('token');
+      localStorage.removeItem('rememberMe');
       setUser(null);
     }
   };
