@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'icons.svg', 'pwa-192x192.png', 'pwa-512x512.png', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'icons.svg', 'pwa-192x192.svg', 'pwa-512x512.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Streakly - Habit Tracker',
         short_name: 'Streakly',
@@ -21,21 +21,21 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: '/pwa-192x192.png',
+            src: '/pwa-192x192.svg',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/svg+xml',
             purpose: 'any'
           },
           {
-            src: '/pwa-512x512.png',
+            src: '/pwa-512x512.svg',
             sizes: '512x512',
-            type: 'image/png',
+            type: 'image/svg+xml',
             purpose: 'any'
           },
           {
-            src: '/pwa-512x512.png',
+            src: '/pwa-512x512.svg',
             sizes: '512x512',
-            type: 'image/png',
+            type: 'image/svg+xml',
             purpose: 'maskable'
           }
         ],
@@ -46,7 +46,10 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/streakly-lwho\.onrender\.com\/api\/.*/i,
+            urlPattern: ({ url }) => {
+              const apiUrl = import.meta.env.VITE_API_URL || 'https://streakly-lwho.onrender.com';
+              return url.href.startsWith(apiUrl);
+            },
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',
