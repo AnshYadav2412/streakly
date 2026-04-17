@@ -46,10 +46,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => {
-              const apiUrl = import.meta.env.VITE_API_URL || 'https://streakly-lwho.onrender.com';
-              return url.href.startsWith(apiUrl);
-            },
+            urlPattern: /^https:\/\/streakly-lwho\.onrender\.com\/api\/.*/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',
