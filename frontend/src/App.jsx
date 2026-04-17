@@ -1,17 +1,21 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 import { AuthProvider } from './context/AuthContext'
 import { HabitProvider } from './context/HabitContext'
 import { ProjectProvider } from './context/ProjectContext'
 import { TimeProvider } from './context/TimeContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import InstallPrompt from './components/InstallPrompt'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import HabitTracker from './pages/HabitTracker'
-import Analytics from './pages/Analytics'
-import Projects from './pages/Projects'
-import TimeTracker from './pages/TimeTracker'
+import LoadingSpinner from './components/LoadingSpinner'
+
+// Lazy load pages for code splitting
+const Home = lazy(() => import('./pages/Home'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const HabitTracker = lazy(() => import('./pages/HabitTracker'))
+const Analytics = lazy(() => import('./pages/Analytics'))
+const Projects = lazy(() => import('./pages/Projects'))
+const TimeTracker = lazy(() => import('./pages/TimeTracker'))
 
 function App() {
   return (
@@ -19,52 +23,54 @@ function App() {
       <HabitProvider>
         <ProjectProvider>
           <TimeProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <HabitTracker />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/habits"
-                element={
-                  <ProtectedRoute>
-                    <HabitTracker />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/projects"
-                element={
-                  <ProtectedRoute>
-                    <Projects />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/time"
-                element={
-                  <ProtectedRoute>
-                    <TimeTracker />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/analytics"
-                element={
-                  <ProtectedRoute>
-                    <Analytics />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+            <Suspense fallback={<LoadingSpinner fullScreen />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <HabitTracker />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/habits"
+                  element={
+                    <ProtectedRoute>
+                      <HabitTracker />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/projects"
+                  element={
+                    <ProtectedRoute>
+                      <Projects />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/time"
+                  element={
+                    <ProtectedRoute>
+                      <TimeTracker />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/analytics"
+                  element={
+                    <ProtectedRoute>
+                      <Analytics />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
             <InstallPrompt />
           </TimeProvider>
         </ProjectProvider>
